@@ -2,6 +2,18 @@ from pico2d import *
 
 # Game object class here
 
+
+class Grass:
+    #객체가 생성될때 처음 호출되는 함수, 객체의 초기상태를 설정한다. 클래스안에서 함수를 쓰려면
+    #self라는 파라미터를 써줘야한다. 생성된 ㄱ객체 그 자신을 가리킨다.
+    def __init__(self):  #모든 클래스안에 들어가는 함수이다. __init__  -> 생성자 함수이다.
+        self.image = load_image('grass.png')
+    def draw(self):
+        self.image.draw(400,30)
+    def update(self):
+        pass
+
+
 def handle_events():
     global running
     events = get_events()
@@ -13,14 +25,19 @@ def handle_events():
 
 def reset_world():
     global running
+    global grass
     running = True
+    grass = Grass()
+
 
 
 def update_world():
+    grass.update()
     pass
 
 def render_world():
     clear_canvas()
+    grass.draw()
     update_canvas()
     pass
 
