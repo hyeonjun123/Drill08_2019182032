@@ -4,6 +4,7 @@ import random
 # Game object class here
 
 
+
 class Grass:
     #객체가 생성될때 처음 호출되는 함수, 객체의 초기상태를 설정한다. 클래스안에서 함수를 쓰려면
     #self라는 파라미터를 써줘야한다. 생성된 ㄱ객체 그 자신을 가리킨다.
@@ -27,6 +28,32 @@ class Boy:
     def draw(self):
         self.image.clip_draw(self.frame*100, 0 , 100, 100, self.x, self.y)
 
+class small_Ball:
+    def __init__(self):
+       # self.x, self.y = 0,90
+        self.x, self.y = random.randint(100, 700), random.randint(200,600)
+        self.image = load_image('ball21x21.png')
+    def update(self):
+        if self.y >= 82:
+            self.y -= random.randint(0, 5)
+
+    def draw(self):
+        self.image.clip_draw(0, 0 , 50, 50, self.x, self.y)
+
+class Big_Ball:
+    def __init__(self):
+       # self.x, self.y = 0,90
+        self.x, self.y = random.randint(100, 700), random.randint(200,600)
+        self.image = load_image('ball41x41.png')
+    def update(self):
+        if self.y >= 85:
+            self.y -= random.randint(0, 5)
+
+    def draw(self):
+        self.image.clip_draw(0, 0, 70, 70, self.x, self.y)
+
+
+
 def handle_events():
     global running
     events = get_events()
@@ -41,7 +68,7 @@ def reset_world():
     global grass
     global team
     global world
-
+    global small_Ball, big_Ball
     running = True
     world = []
 
@@ -49,6 +76,13 @@ def reset_world():
     world.append(grass)
     team = [Boy() for i in range(11)]     #리스트 컴프리핸션
     world += team
+
+    #공
+    small_Ball = [small_Ball() for i in range(10)]
+    world += small_Ball
+
+    big_Ball = [Big_Ball() for i in range(10)]
+    world += big_Ball
 
 
 
